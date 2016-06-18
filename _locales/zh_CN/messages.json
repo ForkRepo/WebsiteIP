@@ -1,0 +1,8 @@
+{
+   "extDesp": {
+      "message": "一个非常简单的Chrome插件，能够在网页中右下角显示它的IP地址(支持IPv4和IPv6)，并且点击图标关闭插件，保证最低资源占用。"
+   },
+   "extName": {
+      "message": "The IP"
+   }
+}

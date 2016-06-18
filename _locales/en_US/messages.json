@@ -1,0 +1,8 @@
+{
+   "extDesp": {
+      "message": "A very Simple Chrome plugin, show the IP address at the bottom of the website, Low memory usage, IPv4 & IPv6 supported."
+   },
+   "extName": {
+      "message": "The IP"
+   }
+}
