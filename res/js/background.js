@@ -37,6 +37,23 @@ function toggleOnOff(tab) {
 	setStatus(setting['status']);
 }
 
+function ipLocation(data) {
+  var l = [];
+  if (data.country !== 'XX') {
+    l.push(data.country);
+  }
+  if (data.region !== 'XX') {
+    l.push(data.region);
+  }
+  if (data.city !== 'XX') {
+    l.push(data.city);
+  }
+  if (data.isp !== 'XX') {
+    l.push(data.isp);
+  }
+  return l.join(' ');
+}
+
 // 监听点击事件
 chrome.browserAction.onClicked.addListener(toggleOnOff);
 
@@ -61,8 +78,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 				try {
 					var loc = JSON.parse(data.content);
           if (loc.code === 0) {
-            location = loc.data.country + ' ' + loc.data.city + ' ' + loc.data.isp;
-
+            location = ipLocation(loc.data || {});
           } else {
             location = '内网或未分配 IP';
 					}
