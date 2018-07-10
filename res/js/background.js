@@ -29,7 +29,7 @@ function setStatus(status) {
 function toggleOnOff(tab) {
 	if (setting['status'] === 'on') {
 		setting['status'] = 'off';
-		
+
 	}
 	else {
 		setting['status'] = 'on';
@@ -56,23 +56,19 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	}
 	else if ('location' === request.get) {
 		var location = '';
-		http_ajax('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=' + request.data, 'GET', false, function(data) {
+		http_ajax('http://ip.taobao.com/service/getIpInfo.php?ip=' + request.data, 'GET', false, function(data) {
 			if (true === data.success) {
 				try {
 					var loc = JSON.parse(data.content);
-					if (loc.ret !== undefined) {
-						if (loc.ret < 0) {
-							location = '内网或未分配IP';
-						}
-						else if(loc.ret == 1) {
-							location = loc.country + ' ' + loc.province + ' ' + loc.city;
-						}
+          if (loc.code === 0) {
+            location = loc.data.country + ' ' + loc.data.city + ' ' + loc.data.isp;
 
+          } else {
+            location = '内网或未分配 IP';
 					}
 				} catch(exception) {
-
+          location = '无法识别的 IP';
 				}
-				
 			}
 			else {
 				location = '';
